@@ -1,4 +1,4 @@
-
+require 'ostruct'
 require_relative '../lib/services/tax_flagger_service.rb'
 
 include Services

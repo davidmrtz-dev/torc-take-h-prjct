@@ -6,31 +6,20 @@ module Services
       include Dictionaries
 
       def perform(products)
-        # perform calculation
-        # that will return the following
-        [
-          {
-            quantity: 2,
-            description: 'book:',
-            price: 12.49,
-            applicable_tax: false,
-            applicable_i_tax: false
-          },
-          {
-            quantity: 1,
-            description: 'music CD:',
-            price: 14.99,
-            applicable_tax: true,
-            applicable_i_tax: false
-          },
-          {
-            quantity: 1,
-            description: 'chocolate bar:',
-            price: 0.85,
-            applicable_tax: false,
-            applicable_i_tax: false
-          }
-        ]
+        products.map do |product|
+          product = OpenStruct.new(product)
+          product.applicable_tax = false
+          product.applicable_i_tax = false
+
+          product.applicable_tax = true if product.description.split(' ').none? do |word|
+            ExemptProducts.get_dictionary.include?(word)
+          end
+
+          product.applicable_i_tax =
+            true if product.description.include?('imported')
+          product.description = "#{product.description.slice(..-4)}:"
+          product
+        end
       end
     end
   end
