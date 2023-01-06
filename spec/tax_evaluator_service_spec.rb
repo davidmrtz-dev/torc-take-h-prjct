@@ -13,7 +13,7 @@ RSpec.describe TaxFlaggerService do
       description: 'music CD:',
       final_price: 16.49,
       tax_applied: 1.499,
-      tax_rounded: 1.5,
+      tax_rounded: 1.5
     })])
   end
 
@@ -26,7 +26,7 @@ RSpec.describe TaxFlaggerService do
       applicable_i_tax: true
     })])).to eq([OpenStruct.new({
       quantity: 1,
-      description: "imported bottle of perfume:",
+      description: 'imported bottle of perfume:',
       final_price: 54.65,
       tax_applied: 7.125,
       tax_rounded: 7.15
@@ -42,14 +42,10 @@ RSpec.describe TaxFlaggerService do
       applicable_i_tax: true
     })])).to eq([OpenStruct.new({
       quantity: 3,
-      description: "imported boxes of chocolates:",
+      description: 'imported boxes of chocolates:',
       final_price: 35.55,
       tax_applied: 1.8075,
       tax_rounded: 1.8
     })])
   end
 end
-
-
-# tax_applied: 1.6875,
-# tax_rounded: 1.69

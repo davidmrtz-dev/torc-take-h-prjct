@@ -1,6 +1,6 @@
 module Seed
   class DataEntry
-    def self.get_data
+    def self.data
       [
         [
           {
@@ -29,7 +29,7 @@ module Seed
             quantity: 1,
             description: 'imported bottle of perfume at',
             price: 47.50
-          },
+          }
         ],
         [
           {
@@ -52,7 +52,7 @@ module Seed
             description: 'imported boxes of chocolates at',
             price: 11.25
           }
-        ],
+        ]
       ]
     end
   end

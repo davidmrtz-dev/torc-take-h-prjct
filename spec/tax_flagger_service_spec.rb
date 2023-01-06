@@ -47,6 +47,6 @@ RSpec.describe TaxFlaggerService do
   end
 
   it 'return an object with flags set' do
-    expect(TaxFlaggerService.perform(input)).to eq output.map{|el| OpenStruct.new(el)}
+    expect(TaxFlaggerService.perform(input)).to eq output.map { |el| OpenStruct.new(el) }
   end
 end

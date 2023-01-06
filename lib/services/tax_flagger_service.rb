@@ -11,12 +11,14 @@ module Services
           product.applicable_tax = false
           product.applicable_i_tax = false
 
-          product.applicable_tax = true if product.description.split(' ').none? do |word|
-            ExemptProducts.get_dictionary.include?(word)
+          product.applicable_tax = true if product.description.split.none? do |word|
+            ExemptProducts.dictionary.include?(word)
           end
 
-          product.applicable_i_tax =
-            true if product.description.include?('imported')
+          if product.description.include?('imported')
+            product.applicable_i_tax =
+              true
+          end
           product.description = "#{product.description.slice(..-4)}:"
           product
         end

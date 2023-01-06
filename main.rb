@@ -5,7 +5,7 @@ require_relative './lib/application'
 
 class RunTime
   def self.execute
-    Application.run()
+    Application.run
   end
 end
 
