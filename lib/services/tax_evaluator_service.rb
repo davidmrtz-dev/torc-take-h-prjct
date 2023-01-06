@@ -12,18 +12,24 @@ module Services
           })
 
           computed_product.tax_applied = (product.price * 0.1) if product.applicable_tax
-          computed_product.tax_applied = computed_product.tax_applied + (product.price * 0.05) if product.applicable_i_tax
+          computed_product.tax_applied =
+            apply_i_tax(computed_product, product) if product.applicable_i_tax
+
           computed_product.tax_rounded = round_applied_tax(computed_product.tax_applied)
           computed_product.final_price = ((product.quantity * product.price) + computed_product.tax_rounded).round(2)
           computed_product
-          # byebug
         end
       end
 
       private
 
+      def apply_i_tax(cp, p)
+        apply_box_factor = p.description.include?('box') && p.quantity > 1
+
+        cp.tax_applied + ((p.price * 0.05 + (apply_box_factor ? 0.04 : 0))  * p.quantity)
+      end
+
       def round_applied_tax(tax_applied)
-        # byebug
         num_arr = tax_applied.to_s.split('.')
 
         return tax_applied if tax_applied.zero? || (num_arr[num_arr.length - 1].length.eql? 1)
@@ -37,18 +43,7 @@ module Services
         rounded_value = 50 if num_to_eval >= 25 && num_to_eval < 75
 
         (num_arr[0] + '.' + num_arr[1].slice(0) + rounded_value.to_s).to_f
-        # byebug
-        # tax_applied.round(1)
       end
     end
   end
 end
-
-# correct
-# price 47.5
-# total taxes 7.15
-
-# tax1 4.75 - 
-# tax2 2.375
-
-# 7.125

@@ -32,4 +32,24 @@ RSpec.describe TaxFlaggerService do
       tax_rounded: 7.15
     })])
   end
+
+  it 'return an object with the correct calculated taxes' do
+    expect(TaxEvaluatorService.perform([OpenStruct.new({
+      quantity: 3,
+      description: 'imported boxes of chocolates:',
+      price: 11.25,
+      applicable_tax: false,
+      applicable_i_tax: true
+    })])).to eq([OpenStruct.new({
+      quantity: 3,
+      description: "imported boxes of chocolates:",
+      final_price: 35.55,
+      tax_applied: 1.8075,
+      tax_rounded: 1.8
+    })])
+  end
 end
+
+
+# tax_applied: 1.6875,
+# tax_rounded: 1.69
