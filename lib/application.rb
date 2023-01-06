@@ -9,6 +9,7 @@ class Application
     def run()
       DataEntry.get_data.map do |products|
         flagged_data = TaxFlaggerService.perform(products)
+        # byebug
         computed_data = TaxEvaluatorService.perform(flagged_data)
         computed_data.each do |prod|
           puts "#{prod.quantity} #{prod.description} #{prod.final_price}"
