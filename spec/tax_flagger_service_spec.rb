@@ -1,8 +1,27 @@
 require 'spec_helper'
 
-RSpec.describe 'basic test' do
-  it 'should assert' do
-    expect(TaxFlaggerService.perform.first).to eq [
+RSpec.describe TaxFlaggerService do
+  let(:input) do
+    [
+      {
+        quantity: 2,
+        description: 'book at',
+        price: 12.49
+      },
+      {
+        quantity: 1,
+        description: 'music CD at',
+        price: 14.99
+      },
+      {
+        quantity: 1,
+        description: 'chocolate bar at',
+        price: 0.85
+      }
+    ]
+  end
+  let(:output) do
+    [
       {
         quantity: 2,
         description: 'book:',
@@ -25,5 +44,9 @@ RSpec.describe 'basic test' do
         applicable_i_tax: false
       }
     ]
+  end
+
+  it 'return an object with flags set' do
+    expect(TaxFlaggerService.perform(input)).to eq output
   end
 end
