@@ -10,9 +10,13 @@ class Application
       DataEntry.get_data.map do |products|
         flagged_data = TaxFlaggerService.perform(products)
         computed_data = TaxEvaluatorService.perform(flagged_data)
-        byebug
-        puts flagged_data
-        sleep 1
+        computed_data.each do |prod|
+          puts "#{prod.quantity} #{prod.description} #{prod.final_price}"
+        end
+        sales_taxes = computed_data.map(&:tax_rounded).inject(0.0, :+)
+        total = computed_data.map(&:final_price).inject(0.0, :+)
+        puts "Sales Taxes: #{sales_taxes}"
+        puts "Total: #{total}"
       end
     end
   end
