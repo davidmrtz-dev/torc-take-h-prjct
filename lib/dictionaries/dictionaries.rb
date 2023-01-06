@@ -7,7 +7,7 @@ module Dictionaries
 
   class ExceptedWords
     def self.get_dictionary
-      ['at', 'cd', 'bar', 'box', 'of', 'bottle', 'boxes', 'packet']
+      ['at', 'CD', 'bar', 'box', 'of', 'bottle', 'boxes', 'packet']
     end
   end
 end
