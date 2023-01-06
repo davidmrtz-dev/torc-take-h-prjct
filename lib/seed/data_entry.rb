@@ -18,7 +18,41 @@ module Seed
             description: 'chocolate bar at',
             price: 0.85
           }
-        ]
+        ],
+        [
+          {
+            quantity: 1,
+            description: 'imported box of chocolates at',
+            price: 10.00
+          },
+          {
+            quantity: 1,
+            description: 'imported bottle of perfume at',
+            price: 47.50
+          },
+        ],
+        [
+          {
+            quantity: 1,
+            description: 'imported bottle of perfume at',
+            price: 27.99
+          },
+          {
+            quantity: 1,
+            description: 'bottle of perfume at',
+            price: 18.99
+          },
+          {
+            quantity: 1,
+            description: 'packet of headache pills at',
+            price: 9.75
+          },
+          {
+            quantity: 3,
+            description: 'imported boxes of chocolates at',
+            price: 11.25
+          }
+        ],
       ]
     end
   end

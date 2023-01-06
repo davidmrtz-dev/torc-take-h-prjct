@@ -17,6 +17,7 @@ class Application
         total = computed_data.map(&:final_price).inject(0.0, :+)
         puts "Sales Taxes: #{sales_taxes}"
         puts "Total: #{total}"
+        puts '======================================='
       end
     end
   end

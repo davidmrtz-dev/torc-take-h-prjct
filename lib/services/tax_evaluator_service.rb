@@ -12,7 +12,7 @@ module Services
           })
 
           computed_product.tax_applied = (product.price * 0.1) if product.applicable_tax
-          computed_product.tax_applied = (product.price * 0.05) if product.applicable_i_tax
+          computed_product.tax_applied = computed_product.tax_applied + (product.price * 0.05) if product.applicable_i_tax
           computed_product.tax_rounded = computed_product.tax_applied.round(1)
           computed_product.final_price = ((product.quantity * product.price) + computed_product.tax_rounded).round(2)
           computed_product
