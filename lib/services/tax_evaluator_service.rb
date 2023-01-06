@@ -23,11 +23,22 @@ module Services
       private
 
       def round_applied_tax(tax_applied)
-        # num_arr = tax_applied.to_s.split('.')
-
-        # return tax_applied if num_arr[num_arr.length - 1].eql? '0'
         # byebug
-        tax_applied.round(1)
+        num_arr = tax_applied.to_s.split('.')
+
+        return tax_applied if tax_applied.zero? || (num_arr[num_arr.length - 1].length.eql? 1)
+
+        num_to_eval = num_arr[1].slice(1..).slice(...2)
+        num_to_eval = num_to_eval + '0' if num_to_eval.length.eql? 1
+        num_to_eval = num_to_eval.to_i
+
+        return tax_applied.round(2) if num_to_eval >= 75
+
+        rounded_value = 50 if num_to_eval >= 25 && num_to_eval < 75
+
+        (num_arr[0] + '.' + num_arr[1].slice(0) + rounded_value.to_s).to_f
+        # byebug
+        # tax_applied.round(1)
       end
     end
   end
