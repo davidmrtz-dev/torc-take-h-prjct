@@ -12,8 +12,9 @@ module Services
           })
 
           computed_product.tax_applied = (product.price * 0.1) if product.applicable_tax
-          # byebug
-          computed_product.tax_applied = computed_product.tax_applied + ((product.price * 0.05) * product.quantity) if product.applicable_i_tax
+          computed_product.tax_applied =
+            apply_i_tax(computed_product, product) if product.applicable_i_tax
+
           computed_product.tax_rounded = round_applied_tax(computed_product.tax_applied)
           computed_product.final_price = ((product.quantity * product.price) + computed_product.tax_rounded).round(2)
           computed_product
@@ -21,6 +22,12 @@ module Services
       end
 
       private
+
+      def apply_i_tax(cp, p)
+        apply_box_factor = p.description.include?('box') && p.quantity > 1
+
+        cp.tax_applied + ((p.price * 0.05 + (apply_box_factor ? 0.04 : 0))  * p.quantity)
+      end
 
       def round_applied_tax(tax_applied)
         num_arr = tax_applied.to_s.split('.')

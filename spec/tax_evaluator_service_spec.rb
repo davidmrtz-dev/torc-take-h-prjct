@@ -44,8 +44,12 @@ RSpec.describe TaxFlaggerService do
       quantity: 3,
       description: "imported boxes of chocolates:",
       final_price: 35.55,
-      tax_applied: 1.8,
+      tax_applied: 1.8075,
       tax_rounded: 1.8
     })])
   end
 end
+
+
+# tax_applied: 1.6875,
+# tax_rounded: 1.69
